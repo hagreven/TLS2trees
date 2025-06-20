@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y  \
 	    build-essential 
 	
  # Install pip and CUDA compatabiilty layer
-RUN apt-get install -y python3.10 python3-pip cuda-compat-12-1
+RUN apt-get install -y python3.10 python3-pip cuda-compat-12-2
 
 # Create symlink for libcusolver, needed for tensorflow
 RUN	cd /usr/local/cuda-12.2/lib64/ && \
