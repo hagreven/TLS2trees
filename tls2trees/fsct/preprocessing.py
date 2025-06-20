@@ -53,14 +53,7 @@ def Preprocessing(params):
     # buffer
     params.pc.loc[:, "buffer"] = False  # might not be needed
     if params.buffer > 0:
-        tile_index = pd.read_csv(
-            params.tile_index,
-            sep=" ",
-            names=["fname", "x", "y", "z", "path"],
-            dtype=str,
-        )
-        for col in ["x", "y", "z"]:
-            tile_index[col] = tile_index[col].astype(float)
+        tile_index = pd.read_csv(params.tile_index, sep=" ", names=["fname", "x", "y"])
 
         # locate 8 nearest tiles
         nn = NearestNeighbors(n_neighbors=9).fit(tile_index[["x", "y"]])
@@ -85,7 +78,7 @@ def Preprocessing(params):
                 )
             )
             if len(fname) > 0:
-                buffer = pd.concat([buffer, load_file(fname[0])])
+                pd.concat([buffer, load_file(fname[0])])
 
         # select desired points
         buffer = buffer.loc[
@@ -104,7 +97,7 @@ def Preprocessing(params):
         buffer.loc[:, "buffer"] = True
         if params.verbose:
             print(f"buffer adds an additional {len(buffer)} points")
-        params.pc = pd.concat([params.pc, buffer])
+        params.pc = params.pc.append(buffer)
 
     if params.subsample:  # subsample if specified
         if params.verbose:
