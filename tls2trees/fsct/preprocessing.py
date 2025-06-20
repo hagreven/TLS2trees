@@ -78,7 +78,7 @@ def Preprocessing(params):
                 )
             )
             if len(fname) > 0:
-                pd.concat([buffer, load_file(fname[0])])
+                buffer = pd.concat([buffer, load_file(fname[0])])
 
         # select desired points
         buffer = buffer.loc[
@@ -97,7 +97,7 @@ def Preprocessing(params):
         buffer.loc[:, "buffer"] = True
         if params.verbose:
             print(f"buffer adds an additional {len(buffer)} points")
-        params.pc = params.pc.append(buffer)
+        params.pc = pd.concat([params.pc, buffer])
 
     if params.subsample:  # subsample if specified
         if params.verbose:
