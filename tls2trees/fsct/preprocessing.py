@@ -104,7 +104,7 @@ def Preprocessing(params):
         buffer.loc[:, "buffer"] = True
         if params.verbose:
             print(f"buffer adds an additional {len(buffer)} points")
-        params.pc = params.pc.append(buffer)
+        params.pc = pd.concat([params.pc, buffer])
 
     if params.subsample:  # subsample if specified
         if params.verbose:
