@@ -79,12 +79,13 @@ def Preprocessing(params):
             disable=False if params.verbose else True,
         ):
             fname = glob.glob(
-                os.path.join(params.directory, f"{tile.fname}*{params.input_format}")
+                os.path.join(
+                    params.directory,
+                    f"{str(tile.fname).zfill(3)}*{params.input_format}",
+                )
             )
             if len(fname) > 0:
-                buffer = buffer.append(
-                    load_file(os.path.join(params.directory, fname[0]))
-                )
+                buffer = pd.concat([buffer, load_file(fname[0])])
 
         # select desired points
         buffer = buffer.loc[
