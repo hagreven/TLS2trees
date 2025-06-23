@@ -218,6 +218,7 @@ if __name__ == "__main__":
         params.ti = pd.read_csv(
             params.tindex, sep=" ", names=["tile", "x", "y", "z", "path"], dtype=str
         )
+        params.ti["tile"] = params.ti["tile"].str.zfill(params.n_zeros)
         for col in ["x", "y", "z"]:
             params.ti[col] = params.ti[col].astype(float)
         n_tiles = NearestNeighbors(n_neighbors=len(params.ti)).fit(
