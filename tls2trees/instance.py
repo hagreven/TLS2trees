@@ -268,9 +268,6 @@ if __name__ == "__main__":
 
     # save space
     params.pc = params.pc[[c for c in ["x", "y", "z", "n_z", "label", "buffer", "fn"]]]
-    params.pc[["x", "y", "z", "n_z"]] = params.pc[["x", "y", "z", "n_z"]].astype(
-        np.float32
-    )
     params.pc.label = params.pc.label.astype(np.int16)
 
     ### generate skeleton points
