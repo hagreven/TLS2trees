@@ -87,8 +87,8 @@ docker build -t tls2trees:latest .
 ```
 Then to run FSCT and the instance segmentation use:
 ```
-docker run -it -v /path/to/data/outsidecontainer:/path/to/data/incontainer fsct:latest semantic.py
-docker run -it -v /path/to/data/outsidecontainer:/path/to/data/incontainer fsct:latest instance.py
+docker run --gpus all -it -v /path/to/data/outsidecontainer:/path/to/data/incontainer tls2trees:latest python opt/tls2trees/semantic.py
+docker run --gpus all -it -v /path/to/data/outsidecontainer:/path/to/data/incontainer tls2trees:latest python opt/tls2trees/instance.py
 ```
 
 For HPC systems, where you don't have permission to run Docker, you can build the container on your local machine and convert to a singularity file using:
